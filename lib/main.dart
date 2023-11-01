@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 NotesBloc()..add(LoadNotes(notes: dummyNotes))),
-        BlocProvider(create: (context) => UsersBloc(UserRepository())),
+        BlocProvider(
+            create: (context) =>
+                UsersBloc(UserRepository())..add(LoadUsersEvent())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

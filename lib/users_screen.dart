@@ -9,43 +9,40 @@ class UsersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UsersBloc(UserRepository())..add(LoadUsersEvent()),
-      child: BlocBuilder<UsersBloc, UsersState>(
-        builder: (context, state) {
-          if (state is UsersLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is UsersLoaded) {
-            List<UserModel> users = state.users;
-            return ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (_, index) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    child: Card(
-                        color: Theme.of(context).cardColor,
-                        child: ListTile(
-                            title: Text(
-                              '${users[index].firstName}  ${users[index].lastName}',
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            subtitle: Text(
-                              '${users[index].email}',
-                              style: const TextStyle(color: Colors.black),
-                            ),
-                            leading: CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(users[index].avatar.toString()),
-                            ))),
-                  );
-                });
-          } else {
-            return const Text('Something went wrong');
-          }
-        },
-      ),
+    return BlocBuilder<UsersBloc, UsersState>(
+      builder: (context, state) {
+        if (state is UsersLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state is UsersLoaded) {
+          List<UserModel> users = state.users;
+          return ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (_, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  child: Card(
+                      color: Theme.of(context).cardColor,
+                      child: ListTile(
+                          title: Text(
+                            '${users[index].firstName}  ${users[index].lastName}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          subtitle: Text(
+                            '${users[index].email}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(users[index].avatar.toString()),
+                          ))),
+                );
+              });
+        } else {
+          return const Text('Something went wrong');
+        }
+      },
     );
   }
 }
