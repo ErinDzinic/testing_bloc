@@ -1,6 +1,6 @@
 # bloc_test
 
-A new Flutter project.
+This is small project just to test how bloc architecture works
 
 ## Getting Started
 
